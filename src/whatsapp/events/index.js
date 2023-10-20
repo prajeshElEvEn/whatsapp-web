@@ -1,12 +1,15 @@
 const qrcode = require("qrcode-terminal");
 const { success } = require("logggger");
+const client = require("../client");
 
 const onQr = (qr) => {
   qrcode.generate(qr, { small: true });
 };
 
-const onReady = () => {
+const onReady = async () => {
   success("Client is ready!");
+  const chats = await client.getChats();
+  console.log(JSON.stringify(chats[1]));
 };
 
 const onAuthenticated = (session) => {

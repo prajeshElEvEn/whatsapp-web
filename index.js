@@ -15,7 +15,7 @@ app.use(express.urlencoded({ extended: false }));
 
 app.listen(port, hostname, async () => {
   warn(`Current environment: ${currentEnv}`);
+  log(`Server running at http://${hostname}:${port}`);
   await db();
   await whatsapp();
-  log(`Server running at http://${hostname}:${port}`);
 });
