@@ -13,6 +13,10 @@ const onAuthenticated = (session) => {
   success("Authenticated");
 };
 
+const onRemoteSessionSaved = () => {
+  success("Remote session saved");
+};
+
 const onMessage = (message) => {
   console.log(message.body);
 };
@@ -21,5 +25,6 @@ module.exports = {
   onQr,
   onReady,
   onAuthenticated,
+  onRemoteSessionSaved,
   onMessage,
 };

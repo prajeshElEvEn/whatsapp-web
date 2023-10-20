@@ -1,7 +1,7 @@
 const { success, error } = require("logggger");
 const mongoose = require("mongoose");
 
-const connectToDB = async (mongoURI) => {
+const connectToDB = async () => {
   try {
     const uri = process.env.MONGO_URI;
     const conn = await mongoose.connect(uri, {
@@ -15,4 +15,6 @@ const connectToDB = async (mongoURI) => {
   }
 };
 
-module.exports = connectToDB;
+module.exports = {
+  connectToDB,
+};
