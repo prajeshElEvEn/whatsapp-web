@@ -1,0 +1,9 @@
+# dirs
+node_modules
+
+# files
+package-lock.json
+.wwebjs_auth
+.wwebjs_cache
+.env.production
+.env.development
