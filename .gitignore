@@ -1,6 +1,7 @@
 # dirs
 node_modules
 data
+tests
 
 # files
 package-lock.json

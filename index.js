@@ -1,8 +1,8 @@
 const express = require("express");
 const cors = require("cors");
-const whatsapp = require("./src/whatsapp");
 const { warn, log } = require("logggger");
 const { db, loadEnv } = require("./src/utils");
+const whatsapp = require("./src/whatsapp");
 
 const currentEnv = loadEnv();
 const port = process.env.PORT || 5000;

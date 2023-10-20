@@ -6,6 +6,7 @@ const {
   onAuthenticated,
   onMessage,
   onRemoteSessionSaved,
+  onDisconnected,
 } = require("./events");
 
 const whatsapp = async () => {
@@ -15,7 +16,7 @@ const whatsapp = async () => {
     client.on("authenticated", onAuthenticated);
     client.on("remote_session_saved", onRemoteSessionSaved);
     client.on("message", onMessage);
-
+    client.on("disconnected", await onDisconnected);
     await client.initialize();
   } catch (err) {
     error(err);
