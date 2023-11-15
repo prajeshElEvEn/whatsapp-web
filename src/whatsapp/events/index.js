@@ -1,7 +1,10 @@
 const qrcode = require("qrcode-terminal");
-const { success } = require("logggger");
+const { success, warn, error, log } = require("logggger");
 const client = require("../client");
-const whatsapp = require("..");
+const { pingMessage } = require("../../jobs");
+const { uploadGroups, updateGroups } = require("../activities");
+const { job } = require("../../utils");
+const { CronJob } = require("cron");
 
 const onQr = (qr) => {
   qrcode.generate(qr, { small: true });
@@ -9,8 +12,15 @@ const onQr = (qr) => {
 
 const onReady = async () => {
   success("Client is ready!");
-  // const chats = await client.getChats();
-  // console.log(JSON.stringify(chats[1]));
+  await uploadGroups(client);
+  const job = new CronJob(
+    "0 * * * * *",
+    async () => {
+      await client.sendMessage("916393318060-1613392542@g.us", "pong");
+    },
+    null,
+    true
+  );
 };
 
 const onAuthenticated = () => {
@@ -28,7 +38,15 @@ const onDisconnected = async () => {
 };
 
 const onMessage = (message) => {
-  console.log(message.body);
+  log(message.body);
+};
+
+const onGroupJoin = async (notification) => {
+  await updateGroups(client, notification);
+};
+
+const onGroupLeave = async (notification) => {
+  await updateGroups(client, notification);
 };
 
 module.exports = {
@@ -38,4 +56,6 @@ module.exports = {
   onRemoteSessionSaved,
   onDisconnected,
   onMessage,
+  onGroupJoin,
+  onGroupLeave,
 };
